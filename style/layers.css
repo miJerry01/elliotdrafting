@@ -1,0 +1,34 @@
+:root {
+
+--clr--blue_plot: #0000ff;
+--clr--blue_dark: #00008b;
+--clr--blue_sky: #00bfff;
+--clr--blue_mid: #1e90ff;
+--clr--blue_lite: #87cefa;
+
+--clr--green_aqua: #7fffd4;
+--clr--green_dark: #006400;
+--clr--green_olive: #556b2f;
+--clr--green_sea: #8FBC8F;
+--clr--green_forest: #228b22;
+
+
+
+--clr-primary: #d0def2;
+--clr-primary-light: #f3f8fe;
+--clr-primary-dark: #a7bad3;
+
+--clr-gray10: #f9fbff;
+--clr-gray15: #f4f6fb;
+--clr-gray20: #eef1f6;
+--clr-gray30: #e1e5ee;
+--clr-gray40: #767b91;
+--clr-gray50: #4f546c;
+--clr-gray60: #2a324b;
+--clr-gray70: #161d34;
+--clr--gray_dim: #696969;
+--clr--gray_lite: #DCDCDC;
+--clr--gray_ivory: #FFFFF0;
+
+
+}
