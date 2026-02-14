@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home Page</title>
+  <title>Home Page Rev.2</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,7 +30,8 @@
       aria-expanded="false"
       aria-controls="site-nav"
     >
-      ☰
+      ☰ Pages
+      
     </button>
 
     <nav class="site-nav" id="site-nav" role="navigation">
@@ -39,11 +40,22 @@
       <a href="#">Page3</a>
       <a href="#">Page4</a>
     </nav>
+    <button
+  class="site-nav-toggle"
+  type="button"
+  aria-label="Open sidebar"
+  aria-expanded="false"
+  aria-controls="site-sidebar"
+>
+  ☰ CAD/RVT
+</button>
+
   </header>
 
-  <aside class="sidebar">
+  <aside class="sidebar" id="site-sidebar">
     <div class="house-y">
       <div class="house-y_room-y">
+        
         <button class="sidebar-nav">TBA</button>
         <button class="sidebar-nav">TBA</button>
         <button class="sidebar-nav">TBA</button>
@@ -182,7 +194,10 @@
         <div class="panel-card">
           <h2 class="panel-title">Box 3 – Right</h2>
           <p class="panel-text">Drop your content here.</p>
-          <img class="room-8-image" src="images/svg-rvt-cutout.svg" alt="">
+        
+                  <img class="room-8-image" src="images/svg-rvt-cutout.svg" alt="">
+            
+      
         </div>
       </div>
     </section>
@@ -298,5 +313,99 @@ Capabilities include:
       nav.classList.toggle("is-open", !isOpen);
     });
   </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
+   <script src="/services/index-2.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+<!-- GSAP first -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+  integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<!-- ScrollTrigger after GSAP -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<script>
+  // register plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // grab the image
+  const img = document.querySelector(".room-8-image");
+
+  // DON'T "return" at top-level — just guard
+  if (img) {
+    // default border (white)
+    gsap.set(img, { borderColor: "#fff" });
+
+    // Trigger based on the IMAGE itself (center over image)
+    ScrollTrigger.create({
+      trigger: img,
+      start: "top center",
+      end: "bottom center",
+
+      onEnter: () => {
+        // NOTE: your --clr-gray10 is almost white; if you want visible change use --clr-gray70
+        gsap.to(img, { borderColor: "var(--clr-gray10)", duration: 0.25 });
+        gsap.fromTo(img, { x: 0 }, { x: 20, yoyo: true, repeat: 3, duration: 0.1 });
+      },
+
+      onLeave: () => gsap.to(img, { borderColor: "#fff", duration: 0.25 }),
+      onEnterBack: () => gsap.to(img, { borderColor: "var(--clr-gray10)", duration: 0.25 }),
+      onLeaveBack: () => gsap.to(img, { borderColor: "#fff", duration: 0.25 }),
+
+      // debug lines (turn on if needed)
+      // markers: true,
+    });
+  } else {
+    console.warn("GSAP: .room-8-image not found");
+  }
+</script>
+
+<script>
+  // SIDEBAR toggle (same pattern as site nav)
+  const sbBtn = document.querySelector(".sidebar-toggle");
+  const sidebar = document.querySelector("#site-sidebar");
+
+  sbBtn?.addEventListener("click", () => {
+    const isOpen = sbBtn.getAttribute("aria-expanded") === "true";
+    sbBtn.setAttribute("aria-expanded", String(!isOpen));
+    sidebar?.classList.toggle("is-open", !isOpen);
+  });
+
+  // Optional: keep state correct when resizing across 650px
+  const mq = window.matchMedia("(min-width: 650px)");
+  function syncSidebarState(e){
+    if (!sbBtn || !sidebar) return;
+    if (e.matches){
+      // desktop: force open
+      sbBtn.setAttribute("aria-expanded", "true");
+      sidebar.classList.add("is-open");
+    } else {
+      // mobile: default closed
+      sbBtn.setAttribute("aria-expanded", "false");
+      sidebar.classList.remove("is-open");
+    }
+  }
+  syncSidebarState(mq);
+  mq.addEventListener?.("change", syncSidebarState);
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
