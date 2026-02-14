@@ -502,3 +502,37 @@ Footer ==============*/
   /* restore sticky on desktop */
   .sidebar { position: sticky; top: 2rem; }
 }
+
+/* =========================
+   MOBILE: make images larger
+========================= */
+@media (max-width: 649px) {
+
+  /* give images more room on small screens */
+  .house-1_room-1,
+  .house-3_room-3,
+  .house-5_room-5,
+  .house-8_room-8,
+  .house-9_room-9 {
+    padding: 0.75rem 0.5rem; /* tighter padding = bigger image area */
+  }
+
+  /* make the "small" images scale up on mobile */
+  .room-1-image,
+  .room-3-image {
+    width: min(100%, 520px);   /* was 50% */
+  }
+
+  .room-8-image,
+  .room-9-image {
+    width: min(100%, 560px);   /* was 70% */
+  }
+
+  /* already 100%, but keep it safe + consistent */
+  .room-2-image,
+  .room-5-image {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
