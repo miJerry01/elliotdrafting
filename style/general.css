@@ -520,12 +520,12 @@ Footer ==============*/
   /* make the "small" images scale up on mobile */
   .room-1-image,
   .room-3-image {
-    width: min(100%, 520px);   /* was 50% */
+    width: min(110%, 520px);   /* was 50% */
   }
 
   .room-8-image,
   .room-9-image {
-    width: min(100%, 560px);   /* was 70% */
+    width: min(110%, 560px);   /* was 70% */
   }
 
   /* already 100%, but keep it safe + consistent */
@@ -535,4 +535,5 @@ Footer ==============*/
     max-width: 600px;
   }
 }
+
 
