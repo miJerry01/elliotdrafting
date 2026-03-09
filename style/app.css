@@ -1,0 +1,281 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 13px/1.4 "Segoe UI", Arial, sans-serif;
+}
+
+.app-shell {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#map {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   FLOATING PANELS
+========================= */
+.floating-panel {
+  position: absolute;
+  z-index: 999;
+}
+
+.floating-panel--home {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+}
+
+.home-link {
+  display: inline-flex;
+  margin-left: 40px;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 0.7rem 1rem;
+  border: 1px solid #2e7dff;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #2e7dff;
+  font: 700 13px/1 "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 120ms ease,
+    box-shadow 160ms ease;
+}
+
+.home-link:hover {
+  background: #2e7dff;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.home-link:active {
+  transform: translateY(0);
+}
+
+.home-link:focus-visible {
+  outline: 2px solid #2e7dff;
+  outline-offset: 2px;
+}
+
+.floating-panel--latlon {
+  left: 20px;
+  top: 90px;
+}
+
+.floating-panel--markups {
+  left: 20px;
+  top: 200px;
+}
+
+.floating-panel--basemap {
+  left: 20px;
+  top: 400px;
+  border-radius: 18px;
+}
+
+.floating-panel--kmz {
+  left: 20px;
+  bottom: 10px;
+}
+
+/* =========================
+   PANEL SIZING
+========================= */
+.panel {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.panel--standard {
+  width: 380px;
+}
+
+.panel--wide {
+  width: 300px;
+}
+
+.panel--gallery {
+  width: 150px;
+  height: 400px;
+  overflow: auto;
+}
+
+/* =========================
+   FORM CONTROLS
+========================= */
+.input-row,
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.panel input[type="text"] {
+  flex: 1 1 240px;
+  min-width: 0;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font: 13px/1.4 "Segoe UI", Arial, sans-serif;
+}
+
+.panel button {
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font: 13px/1.4 "Segoe UI", Arial, sans-serif;
+  white-space: nowrap;
+}
+
+.panel button:hover {
+  background: #f5f5f5;
+}
+
+.error {
+  color: #f66;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.kmz-list {
+  margin-top: 8px;
+  font: 13px/1.4 "Segoe UI", Arial, sans-serif;
+  max-height: 160px;
+  overflow: auto;
+  border-top: 1px solid #eee;
+  padding-top: 6px;
+}
+
+.kmz-item {
+  margin: 4px 0;
+}
+
+.kmz-item label {
+  cursor: pointer;
+}
+
+.hint {
+  font: 12px/1.4 "Segoe UI", Arial, sans-serif;
+  color: #444;
+  margin-top: 8px;
+}
+
+.btn-on {
+  border-color: #2e7dff !important;
+  color: #2e7dff !important;
+}
+
+/* =========================
+   TITLEPANE LOOK
+========================= */
+.dijitTitlePane {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dijitTitlePaneTitle {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dijitTitlePaneContentOuter {
+  background: #fff;
+}
+
+/* =========================
+   SMALL SCREEN
+========================= */
+@media (max-width: 600px) {
+  html,
+  body,
+  .app-shell,
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+
+  .floating-panel {
+    left: 10px !important;
+    right: 10px !important;
+    width: auto;
+  }
+
+  .floating-panel--home {
+    left: 10px !important;
+    right: auto !important;
+    top: 10px;
+    z-index: 2000;
+  }
+
+  .home-link {
+    min-width: 78px;
+    padding: 0.6rem 0.85rem;
+    font-size: 12px;
+  }
+
+  .floating-panel--latlon {
+    top: 55px;
+  }
+
+  .floating-panel--markups {
+    top: 102px;
+  }
+
+  .floating-panel--basemap {
+    top: 144px;
+  }
+
+  .floating-panel--kmz {
+    bottom: 10px;
+  }
+
+  .panel--standard,
+  .panel--wide,
+  .panel--gallery {
+    width: 100%;
+  }
+
+  .panel--gallery {
+    height: 180px;
+  }
+
+  .input-row,
+  .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .panel input[type="text"],
+  .panel button {
+    width: 100%;
+  }
+
+  .kmz-list {
+    max-height: 100px;
+  }
+}
