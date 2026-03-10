@@ -2,38 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>Pac-Man (canvas)</title>
   <link rel="stylesheet" href="../style/game.css"/>
 
-
+  <style>
+    /* canvas swipe support */
+    #game {
+      touch-action: none;
+      -ms-touch-action: none;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
-
-
-
 <body>
 
-  
-
-<nav class="home-link" id="nav-back" role="navigation"> 
-  <a href="../index.html">home</a>
-</nav>
-  
+  <nav class="home-link" id="nav-back" role="navigation">
+    <a href="../index.html">home</a>
+  </nav>
 
   <div class="game-wrap">
     <div id="score">Score: 0</div>
     <div id="lives">Lives: 5</div>
     <canvas id="game"></canvas>
-
-
   </div>
 
-  <div id="message">Use arrow keys to move</div>
+  <div id="message">Use arrow keys on desktop or swipe on the canvas on mobile</div>
 
   <script>
     const TILE = 28;
 
-    /* 
+    /*
       0 = empty
       1 = wall
       2 = dot
@@ -129,7 +133,7 @@
 
       if (lives <= 0) {
         gameOver = true;
-        messageEl.textContent = "Game over! Press R to restart";
+        messageEl.textContent = "Game over! Press R or double-tap canvas to restart";
       } else {
         messageEl.textContent = `You were caught! ${lives} chance${lives === 1 ? "" : "s"} left`;
         powerModeTimer = 0;
@@ -173,6 +177,71 @@
         location.reload();
       }
     });
+
+    /* =========================
+       SWIPE CONTROLS ON CANVAS
+    ========================= */
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let lastTapTime = 0;
+
+    function handleSwipe(dx, dy) {
+      const minSwipeDistance = 24;
+
+      if (Math.abs(dx) < minSwipeDistance && Math.abs(dy) < minSwipeDistance) {
+        return;
+      }
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) {
+          pacman.nextDir = 1; // right
+        } else {
+          pacman.nextDir = 3; // left
+        }
+      } else {
+        if (dy > 0) {
+          pacman.nextDir = 2; // down
+        } else {
+          pacman.nextDir = 0; // up
+        }
+      }
+    }
+
+    canvas.addEventListener("touchstart", (e) => {
+      const touch = e.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchStartTime = Date.now();
+    }, { passive: true });
+
+    canvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener("touchend", (e) => {
+      const touch = e.changedTouches[0];
+      const touchEndX = touch.clientX;
+      const touchEndY = touch.clientY;
+
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      const touchDuration = Date.now() - touchStartTime;
+
+      // restart on double tap when game has ended
+      if ((gameOver || win) && Math.abs(dx) < 10 && Math.abs(dy) < 10 && touchDuration < 250) {
+        const now = Date.now();
+        if (now - lastTapTime < 350) {
+          location.reload();
+          return;
+        }
+        lastTapTime = now;
+      }
+
+      if (!gameOver && !win) {
+        handleSwipe(dx, dy);
+      }
+    }, { passive: true });
 
     function drawMap() {
       for (let y = 0; y < ROWS; y++) {
@@ -291,7 +360,7 @@
 
       if (countRemainingDots() === 0) {
         win = true;
-        messageEl.textContent = "You win! Press R to restart";
+        messageEl.textContent = "You win! Press R or double-tap canvas to restart";
       }
     }
 
