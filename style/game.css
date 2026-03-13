@@ -25,25 +25,27 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   min-height: 100vh;
   padding: 2rem 1rem;
-  overflow: hidden;
 }
-.home-link {
- margin-right: 30px;
- margin-bottom: 50px;
- margin-top: -80px;
-   min-width: 180px;
-  text-align: center;
 
+.home-link {
+  margin-right: 30px;
+  margin-bottom: 50px;
+  margin-top: -20px;
+  min-width: 180px;
+  text-align: center;
   color: #ffe600;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
 
+.home-link a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* =========================
@@ -52,7 +54,6 @@ body {
 .game-wrap {
   position: relative;
   display: inline-block;
-
   padding: 1rem;
   background: #000;
   border: 4px solid #1a1a1a;
@@ -73,25 +74,36 @@ body {
   border-radius: 8px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  touch-action: none;
+  -ms-touch-action: none;
+  max-width: 100%;
+  height: auto;
 }
 
 /* =========================
-   SCORE
+   SCORE + LIVES
 ========================= */
-#score {
+#score,
+#lives {
   position: absolute;
   top: -2.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-
-  min-width: 180px;
+  min-width: 140px;
   text-align: center;
-
   color: #ffe600;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+#score {
+  left: 30%;
+  transform: translateX(-50%);
+}
+
+#lives {
+  left: 70%;
+  transform: translateX(-50%);
 }
 
 /* =========================
@@ -100,10 +112,56 @@ body {
 #message {
   margin-top: 1rem;
   text-align: center;
-
   color: #d6d6d6;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
+  max-width: 700px;
+}
+
+/* =========================
+   HIGH SCORES
+========================= */
+.high-scores-wrap {
+  width: min(100%, 520px);
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 3px solid #1f38ff;
+  border-radius: 12px;
+  background: #050505;
+  box-shadow:
+    0 0 0 2px #0a0a0a,
+    0 0 18px rgba(0, 80, 255, 0.15);
+}
+
+.high-scores-wrap h2 {
+  text-align: center;
+  color: #ffe600;
+  margin-bottom: 0.9rem;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+#high-scores-list {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+#high-scores-list li {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  color: #f5f5f5;
+  font-size: 1rem;
+}
+
+#high-scores-list li:last-child {
+  border-bottom: none;
+}
+
+.empty-score {
+  list-style: none;
+  color: #bdbdbd;
 }
 
 /* =========================
@@ -111,7 +169,7 @@ body {
 ========================= */
 @media (max-width: 600px) {
   body {
-    padding: 1.5rem 0.75rem;
+    padding: 1.5rem 0.75rem 2rem;
   }
 
   .game-wrap {
@@ -124,15 +182,37 @@ body {
     height: auto;
   }
 
-  #score {
+  #score,
+  #lives {
     top: -2rem;
-    font-size: 0.95rem;
-    min-width: 140px;
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+
+  #score {
+    left: 28%;
+  }
+
+  #lives {
+    left: 72%;
   }
 
   #message {
     font-size: 0.85rem;
     margin-top: 0.85rem;
+    line-height: 1.4;
   }
 
+  .high-scores-wrap {
+    margin-top: 1.1rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .high-scores-wrap h2 {
+    font-size: 1rem;
+  }
+
+  #high-scores-list li {
+    font-size: 0.95rem;
+  }
 }
