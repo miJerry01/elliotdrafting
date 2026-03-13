@@ -16,12 +16,22 @@
   </nav>
 
   <div class="game-wrap">
-    <div id="score">Score: 0</div>
+    <div
+      id="score"
+      class="pause-trigger"
+      role="button"
+      tabindex="0"
+      aria-label="Pause or resume game"
+      title="Tap or click score to pause"
+    >
+      Score: 0
+    </div>
+
     <div id="lives">Lives: 5</div>
     <canvas id="game"></canvas>
   </div>
 
-  <div id="message">Use arrow keys on desktop, swipe on mobile, press P to pause</div>
+  <div id="message">Tap Score to pause on mobile, swipe to move, or press P on desktop</div>
 
   <section class="high-scores-wrap" aria-labelledby="high-scores-title">
     <h2 id="high-scores-title">Top 5 High Scores</h2>
@@ -40,27 +50,27 @@
       3 = power pellet
     */
     const MAP = [
-      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], // 0
-      [1,2,2,2,2,2,2,2,3,1,2,2,2,2,2,2,3,2,1], // 1
-      [1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,2,1], // 2
-      [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1], // 3
-      [1,2,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1], // 4
-      [1,2,2,2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,1], // 5
-      [1,1,1,1,2,1,1,1,1,2,1,1,1,1,2,1,2,1,1], // 6
-      [1,2,2,2,2,1,2,2,2,2,2,2,2,1,2,1,2,1,1], // 7
-      [1,2,1,1,2,1,2,1,1,0,1,1,2,1,2,1,2,1,1], // 8
-      [1,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,1], // 9
-      [1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1], // 10
-      [1,2,2,2,2,1,3,2,2,2,2,2,2,1,2,2,2,2,1], // 11
-      [1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,1], // 12
-      [1,3,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,3,1], // 13
-      [1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,2,1], // 14
-      [1,2,2,1,2,2,2,2,2,0,2,2,2,2,2,1,2,2,1], // 15
-      [1,1,2,1,2,1,2,1,1,1,1,1,2,1,2,1,2,1,1], // 16
-      [1,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,1], // 17
-      [1,2,1,1,1,1,1,1,2,1,2,1,1,1,1,1,1,2,1], // 18
-      [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1], // 19
-      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]  // 20
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,2,2,2,2,2,2,2,3,1,2,2,2,2,2,2,3,2,1],
+      [1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,2,1],
+      [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+      [1,2,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1],
+      [1,2,2,2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,1],
+      [1,1,1,1,2,1,1,1,1,2,1,1,1,1,2,1,2,1,1],
+      [1,2,2,2,2,1,2,2,2,2,2,2,2,1,2,1,2,1,1],
+      [1,2,1,1,2,1,2,1,1,0,1,1,2,1,2,1,2,1,1],
+      [1,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,1],
+      [1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,2,1],
+      [1,2,2,2,2,1,3,2,2,2,2,2,2,1,2,2,2,2,1],
+      [1,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,1],
+      [1,3,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,3,1],
+      [1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,2,1],
+      [1,2,2,1,2,2,2,2,2,0,2,2,2,2,2,1,2,2,1],
+      [1,1,2,1,2,1,2,1,1,1,1,1,2,1,2,1,2,1,1],
+      [1,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,1],
+      [1,2,1,1,1,1,1,1,2,1,2,1,1,1,1,1,1,2,1],
+      [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
 
     const ROWS = MAP.length;
@@ -77,10 +87,10 @@
     const highScoresList = document.getElementById("high-scores-list");
 
     const DIRS = [
-      { x: 0, y: -1 }, // up
-      { x: 1, y: 0 },  // right
-      { x: 0, y: 1 },  // down
-      { x: -1, y: 0 }  // left
+      { x: 0, y: -1 },
+      { x: 1, y: 0 },
+      { x: 0, y: 1 },
+      { x: -1, y: 0 }
     ];
 
     let score = 0;
@@ -89,7 +99,7 @@
     let win = false;
     let paused = false;
     let powerModeTimer = 0;
-    const defaultMessage = "Use arrow keys on desktop, swipe on mobile, press P to pause";
+    const defaultMessage = "Tap Score to pause on mobile, swipe to move, or press P on desktop";
 
     const pacman = {
       x: 9,
@@ -126,9 +136,11 @@
       paused = !paused;
 
       if (paused) {
-        messageEl.textContent = "Paused — press P to resume or use two-finger tap on mobile";
+        messageEl.textContent = "Paused — tap Score again to resume";
+        scoreEl.classList.add("is-paused");
       } else {
         messageEl.textContent = defaultMessage;
+        scoreEl.classList.remove("is-paused");
       }
     }
 
@@ -230,6 +242,11 @@
         return;
       }
 
+      if (e.key === "Enter" && document.activeElement === scoreEl) {
+        togglePause();
+        return;
+      }
+
       if (!paused) {
         if (e.key === "ArrowUp") pacman.nextDir = 0;
         else if (e.key === "ArrowRight") pacman.nextDir = 1;
@@ -241,6 +258,12 @@
         location.reload();
       }
     });
+
+    scoreEl.addEventListener("click", togglePause);
+    scoreEl.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      togglePause();
+    }, { passive: false });
 
     let touchStartX = 0;
     let touchStartY = 0;
@@ -264,17 +287,11 @@
     }
 
     canvas.addEventListener("touchstart", (e) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        togglePause();
-        return;
-      }
-
       const touch = e.changedTouches[0];
       touchStartX = touch.clientX;
       touchStartY = touch.clientY;
       touchStartTime = Date.now();
-    }, { passive: false });
+    }, { passive: true });
 
     canvas.addEventListener("touchmove", (e) => {
       e.preventDefault();
@@ -421,7 +438,7 @@
       if (countRemainingDots() === 0) {
         win = true;
         saveHighScore(score);
-        messageEl.textContent = "You win! Press R or double-tap canvas to restart";
+        messageEl.textContent = "You win not Bad for a beginner! Press R or double-tap canvas to restart";
       }
     }
 
