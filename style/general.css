@@ -449,6 +449,30 @@ Footer ==============*/
 }
 
 /* =========================
+   VIEW COUNTER (BOTTOM RIGHT)
+========================= */
+#viewer-counter {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+
+
+/* =========================
    MOBILE GRID (matches your screenshot)
    - header full width
    - sidebar full width
