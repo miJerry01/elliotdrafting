@@ -425,6 +425,39 @@ All content on this website, including but not limited to images, CAD drawings, 
 
 <script src="../services/mapCal.js"></script>
 
+  <script>
+  (function () {
+    const key = "edge_view_count";
+
+    let count = localStorage.getItem(key) || 0;
+    count = Number(count) + 1;
+    localStorage.setItem(key, count);
+
+    // 👉 check URL for admin flag
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+
+    const counter = document.getElementById("viewer-counter");
+    const el = document.getElementById("view-count");
+
+    if (el) el.textContent = count.toLocaleString();
+
+    // 👉 hide for public
+    if (!isAdmin && counter) {
+      counter.style.display = "none";
+    }
+  })();
+</script>
+
+
+  <!-- VIEW COUNTER -->
+<div id="viewer-counter">
+  👁 Views: <span id="view-count">0</span>
+</div>
+
+
+
+
+
 
 
 
