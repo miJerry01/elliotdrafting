@@ -425,44 +425,43 @@ All content on this website, including but not limited to images, CAD drawings, 
 
 <script src="../services/mapCal.js"></script>
 
-  <script>
+ 
+<script>
   (function () {
     const key = "edge_view_count";
+    const sessionKey = "edge_visited_session";
 
-    let count = localStorage.getItem(key) || 0;
-    count = Number(count) + 1;
-    localStorage.setItem(key, count);
+    // 👉 Only count once per session (per tab open)
+    if (!sessionStorage.getItem(sessionKey)) {
+      
+      let count = localStorage.getItem(key) || 0;
+      count = Number(count) + 1;
 
-    // 👉 check URL for admin flag
-    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+      localStorage.setItem(key, count);
+      sessionStorage.setItem(sessionKey, "true");
+    }
 
-    const counter = document.getElementById("viewer-counter");
+    // 👉 display count
     const el = document.getElementById("view-count");
+    if (el) {
+      el.textContent = Number(localStorage.getItem(key)).toLocaleString();
+    }
 
-    if (el) el.textContent = count.toLocaleString();
+    // 👉 OPTIONAL: keep your admin visibility control
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
+    const counter = document.getElementById("viewer-counter");
 
-    // 👉 hide for public
     if (!isAdmin && counter) {
       counter.style.display = "none";
     }
+
   })();
 </script>
-
 
   <!-- VIEW COUNTER -->
 <div id="viewer-counter">
   👁 Views: <span id="view-count">0</span>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
