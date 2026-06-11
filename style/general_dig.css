@@ -1,0 +1,830 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sheet-bg: #d9d9d9;
+  --line: #4b4b4b;
+  --text: #111111;
+  --surface: #ffffff;
+  --header-bg: #ffffff;
+  --border: #000000;
+  --row-hover: #f0f0f0;
+  --text-primary: #000000;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text);
+  background: var(--sheet-bg);
+}
+
+/* =========================
+   SHEET LAYOUT
+========================= */
+.sheet-11x18 {
+  width: min(95vw, 18in);
+  aspect-ratio: 18 / 11;
+  background: white;
+  border: 2px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 110px 1fr 90px;
+  grid-template-areas:
+    "header"
+    "box1"
+    "footer";
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  grid-area: header;
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+  border-top: 3px solid #000;
+  border-bottom: none;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "house5 house6";
+  align-items: stretch;
+  gap: 1rem;
+
+  min-height: 85px;
+  padding: 0.6rem 1rem;
+  background: var(--header-bg);
+}
+
+/* =========================
+   HOUSE 5
+========================= */
+.house-5 {
+  grid-area: house5;
+  background: #fff;
+ margin-right: 200px;
+  min-height: 80px;
+}
+
+.house-5-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.5rem, 0.4rem + 0.4vw, 0.9rem);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+
+
+}
+
+.house-5-title-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.48rem, 0.22rem + 0.25vw, 0.72rem);
+   font-weight: 502;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0.2rem;
+ 
+
+
+}
+
+/* =========================
+   HOUSE 6
+========================= */
+.house-6 {
+  grid-area: house6;
+  background: #fff;
+  margin-right: 200px;
+  min-height: 80px;
+}
+
+.house-6-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.5rem, 0.4rem + 0.4vw, 0.9rem);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
+.house-6-title-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.48rem, 0.22rem + 0.25vw, 0.72rem);
+   font-weight: 502;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0.2rem;
+}
+
+/* =========================
+   BOX-1 GRID
+========================= */
+.box-1 {
+  grid-area: box1;
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 1px solid var(--line);
+  border-top: none;
+
+  display: grid;
+  grid-template-columns: 0.78fr 1.2fr;
+  grid-template-rows: 555px 80px 160px;
+  grid-template-areas:
+    "house7 house8"
+    "house9 house11"
+    "house10 house11";
+
+  gap: 0.8rem;
+  padding: 0.55rem;
+  overflow: visible;
+}
+
+/* =========================
+   HOUSE 7
+========================= */
+.house-7 {
+  grid-area: house7;
+  height: 555px;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.house-7 img {
+  width: 99%;
+  height: 99%;
+  object-fit: contain;
+  display: block;
+  border: solid black 1px;
+}
+
+/* =========================
+   HOUSE 8
+========================= */
+.house-8 {
+  grid-area: house8;
+  height: 620px;
+  padding: 0.1rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+  background: white;
+}
+
+.house-8-inner {
+  width: 80%;
+  height: 85%;
+  overflow: hidden;
+ 
+  margin-left: 65px;
+}
+
+/* =========================
+   HOUSE 9 / 10 
+========================= */
+.house-9 {
+  grid-area: house9;
+  margin-top: 5px;
+  height: 80px;
+  background: white;
+}
+
+.house-10 {
+  grid-area: house10;
+  height: 160px;
+  background: white;
+}
+
+/* =========================
+   HOUSE 11 - SVG DETAIL
+========================= */
+.house-11,
+.house-11-inner,
+.house-11-svg {
+  pointer-events: none;
+}
+.house-11 {
+  grid-area: house11;
+  background: transparent;
+  margin-top: 230px;
+
+  /* allows SVG to extend outside house-11 */
+  overflow: visible;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  /* keeps it above nearby containers */
+  position: relative;
+  z-index: 10;
+}
+
+.house-11-inner {
+  margin-top: 0;
+  width: 145%;
+  height: 135%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+  z-index: 11;
+}
+.house-11-svg {
+  width: 1800%;
+  height: 1800%;
+  max-width: none;
+  max-height: none;
+
+  object-fit: contain;
+  display: block;
+/*border: solid blue 1px;*/
+  position: relative;
+  z-index: 12;
+}
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  grid-area: footer;
+  height: 100%;
+  border: 3px solid #000;
+  display: grid;
+  grid-template-columns: 160px 130px 100px 120fr 70fr 95px 90px;
+  overflow: hidden;
+}
+
+.footer > div {
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  overflow: hidden;
+}
+
+.footer > div:last-child {
+  border-right: none;
+}
+
+/* =========================
+   HOUSE 12
+========================= */
+.house-12 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.35rem;
+}
+
+.house-12 img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================
+   HOUSE 13
+========================= */
+.house-13 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.08rem;
+}
+
+.house-13 img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================
+   HOUSE 14
+========================= */
+.house-14 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  overflow: hidden;
+}
+
+.house-14-text {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.30rem, 0.20rem + 0.25vw, 0.48rem);
+  line-height: 1.05;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  text-transform: uppercase;
+  padding: 0.1rem;
+}
+
+/* =========================
+   HOUSE 15
+========================= */
+.house-15 {
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-note-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.table-note-wrap table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table-note-wrap col:nth-child(1) { width: 5%; }
+.table-note-wrap col:nth-child(2) { width: 46%; }
+.table-note-wrap col:nth-child(3) { width: 8%; }
+.table-note-wrap col:nth-child(4) { width: 8%; }
+.table-note-wrap col:nth-child(5) { width: 8%; }
+
+.table-note-wrap td {
+  border: 1px solid var(--line);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.42rem, 0.25rem + 0.2vw, 0.6rem);
+  padding: 0.02rem 0.12rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.table-note-wrap td:nth-child(1),
+.table-note-wrap td:nth-child(2),
+.table-note-wrap td:nth-child(3),
+.table-note-wrap td:nth-child(4) {
+  text-align: center;
+}
+
+.table-note-wrap tbody tr:first-child td {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* =========================
+   HOUSE 16
+========================= */
+.house-16 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.house-16-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(0.40rem, 0.40rem + 0.40vw, 0.90rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* =========================
+   HOUSE 17
+========================= */
+.house-17 {
+  background: #fff;
+}
+
+/* =========================
+   HOUSE 18
+========================= */
+.house-18 {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.footer-mini-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.footer-mini-wrap table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.footer-mini-wrap td {
+  border: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.42rem, 0.26rem + 0.22vw, 0.68rem);
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.1rem;
+  border-left: 3px solid #000;
+}
+
+.print-trigger {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.42rem, 0.26rem + 0.22vw, 0.68rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.print-trigger:hover {
+  background: #f2f2f2;
+}
+
+.print-trigger:active {
+  background: #e0e0e0;
+  transform: scale(0.98);
+}
+/* =========================
+   TABLE
+========================= */
+.spec11-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spec11-wrap table {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+.spec11-wrap th,
+.spec11-wrap td {
+  border: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.42rem, 0.25rem + 0.3vw, 0.62rem);
+  padding: 0.14rem 0.2rem;
+  line-height: 1.15;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.spec11-wrap th {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* =========================
+   NOTES STYLING
+========================= */
+.notes-block {
+  padding: 0.4rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.55rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.notes-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.notes-block ul,
+.notes-block ol {
+  padding-left: 0.9rem;
+}
+
+.notes-block li {
+  margin-bottom: 0.15rem;
+}
+/* =========================
+   PRINT / PDF - MAOP 50.32 FIX
+========================= */
+@page {
+  size: 18in 11in;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    width: 18in;
+    height: 11in;
+    margin: 0;
+    padding: 0;
+    background: white;
+    overflow: hidden;
+  }
+
+  body {
+    display: block;
+  }
+
+  .sheet-11x18 {
+    width: 18in;
+    height: 11in;
+    margin: 0;
+    padding: 0.25in;
+    box-sizing: border-box;
+    aspect-ratio: auto;
+    overflow: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-trigger {
+    visibility: hidden !important;
+  }
+ 
+  .box-1 {
+    overflow: hidden !important;
+  }
+
+  /* =========================
+   HOUSE-7 IMAGE PRINT CONTROL
+========================= */
+
+.house-7 {
+  overflow: hidden !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* PRINT / PDF MAP IMAGE CONTROL */
+.house-7 img {
+
+  /* MAIN SIZE CONTROL */
+  width: 99% !important;
+  height: 97.5% !important;
+
+  /* IMAGE FITTING */
+  object-fit: contain !important;
+
+  /* POSITION CONTROL */
+  object-position: center center;
+
+  /* OPTIONAL OFFSET */
+  margin-top: -1px;
+  margin-left: 0;
+
+  display: block;
+
+  /* PRINT QUALITY */
+  image-rendering: high-quality;
+
+  border: solid black 1px;
+}
+
+.house-9, .house-10 {
+    /* OPTIONAL OFFSET */
+  margin-top: -20px;
+  margin-left: 0;
+
+}
+
+  .house-11 {
+    overflow: hidden !important;
+    margin-top: 0 !important;
+  }
+
+  .house-11-inner {
+    width: 280% !important;
+    height: 220% !important;
+    margin-top: 320px !important;
+    overflow: hidden !important;
+  }
+
+  .house-11-svg {
+    width: 200% !important;
+    height: 100% !important;
+    max-width: 200% !important;
+    max-height: 100% !important;
+    object-fit: contain;
+   
+  }
+
+  .house-8-inner,
+  .spec11-wrap {
+    overflow: hidden !important;
+  }
+
+  .spec11-wrap table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .spec11-wrap th,
+  .spec11-wrap td {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    font-size: 0.48rem;
+    padding: 0.08rem 0.12rem;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+/* =========================
+   MOBILE / SMALL SCREEN
+========================= */
+@media (max-width: 768px) {
+
+  body {
+    padding: 0.25rem;
+  }
+
+  .sheet-11x18 {
+    width: 100%;
+    height: auto;
+    aspect-ratio: unset;
+    grid-template-rows: auto auto auto;
+    padding: 0.4rem;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "house5"
+      "house6";
+    padding: 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .house-5,
+  .house-6 {
+    min-height: 60px;
+    font-size: 0.75rem;
+  }
+
+  .box-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "house7"
+      "house8"
+      "house9"
+      "house10"
+      "house11";
+    gap: 0.5rem;
+    padding: 0.4rem;
+  }
+
+  .house-7,
+  .house-8,
+  .house-9,
+  .house-10,
+  .house-11 {
+    height: auto !important;
+  }
+
+  .house-7 {
+    max-height: 300px;
+  }
+
+  .house-7 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .house-8 {
+    padding: 0.2rem;
+  }
+
+  .house-8-inner {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    overflow-x: auto;
+  }
+
+  .spec11-wrap {
+    overflow-x: auto;
+  }
+
+  .spec11-wrap table {
+    min-width: 600px;
+  }
+
+  .spec11-wrap th,
+  .spec11-wrap td {
+    font-size: 0.58rem;
+    padding: 0.08rem 0.12rem;
+  }
+
+  .notes-block {
+    font-size: 0.5rem;
+    line-height: 1.15;
+  }
+
+  .notes-title {
+    font-size: 0.7rem;
+  }
+
+  .house-11-inner {
+    margin-top: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .house-11-svg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .house-13 img {
+    max-width: 120px;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .footer > div {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer > div:last-child {
+    border-bottom: none;
+  }
+
+  .house-14-text {
+    font-size: 0.45rem;
+    line-height: 1.1;
+  }
+
+  .footer-mini-wrap td,
+  .table-note-wrap td {
+    font-size: 0.45rem;
+    padding: 0.05rem;
+  }
+}
